@@ -1,0 +1,23 @@
+
+.counter {
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: #8E91F5;
+    min-width: 20.4em;
+    min-height: 8em;
+    text-align: center;
+
+}
+
+.counterText {
+
+    font-size: 5rem;
+
+}
+
+.counterTextMax {
+    color: red;
+}
+
+
+

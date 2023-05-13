@@ -1,0 +1,26 @@
+.display  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 12.5rem;
+    min-width: 22em;
+    margin-bottom: 1rem;
+    background-color: #444675;
+    gap: 1rem;
+    padding: 1rem;
+    border: 5px solid #8E91F5;
+    border-radius: 10px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
