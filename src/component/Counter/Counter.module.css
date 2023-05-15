@@ -1,19 +1,28 @@
 
 .counter {
+    text-align: center;
+    vertical-align: center;
     padding: 1rem;
     border-radius: 5px;
     background-color: #8E91F5;
     min-width: 20.4em;
     min-height: 8em;
-    text-align: center;
 
+
+}
+
+.counterErrorText {
+    font-size: 2.2rem;
+    color: red;
+    word-wrap: break-word;
 }
 
 .counterText {
-
     font-size: 5rem;
-
+    word-wrap: break-word;
+    color: black;
 }
+
 
 .counterTextMax {
     color: red;

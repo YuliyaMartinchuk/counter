@@ -1,11 +1,17 @@
-.display  {
+.display {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.wrapper  {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 12.5rem;
     min-width: 22em;
-    margin-bottom: 1rem;
+    margin: 2em;
     background-color: #444675;
     gap: 1rem;
     padding: 1rem;
@@ -13,6 +19,7 @@
     border-radius: 10px;
 
 }
+
 
 
 
