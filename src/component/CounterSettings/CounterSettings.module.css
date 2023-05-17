@@ -1,5 +1,13 @@
 
-
+.counterSettings {
+    font-size: 1.5rem;
+    word-wrap: break-word;
+    color: black;
+    width: 22.3em;
+    height: 5.9em;
+    min-width: 20.4em;
+    min-height: 5em;
+}
 
 
 

@@ -1,8 +1,5 @@
 import React, {FC} from 'react';
-import k from "./Counter.module.css";
-import s from "../Button/Button.module.css";
-import {Button} from "../Button/Button";
-
+import s from "./Counter.module.css";
 
 type PropsType = {
     startValue:number
@@ -13,27 +10,20 @@ type PropsType = {
 
 }
 
-export const Counter: FC<PropsType> = (props
-) => {
-    const {maxValue,counterValue, error, textError, ...otherProps} = props
-
+export const Counter: FC<PropsType> = ({maxValue,counterValue, error}) => {
     const counterWarning =
         error
-            ? k.counterErrorText
+            ? s.counterErrorText
             : counterValue >= maxValue
-                ? `${k.counterText} ${k.counterTextMax}`
-                : k.counterText
-
+                ? `${s.counterText} ${s.counterTextMax}`
+                : s.counterText
 
     return (
 
-        <div className={k.counter}>
-
-            <div>
-                {props.error
+        <div className={s.counter}>
+                {error
                     ? <span className={counterWarning}> {error}</span>
                     : <span className={counterWarning}>{counterValue}</span>}
-            </div>
         </div>
     );
 };

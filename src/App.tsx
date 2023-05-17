@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.module.css';
 import {Display} from "./component/Display/Display";
-import k from "./App.module.css"
+import s from "./App.module.css"
 
 
 function App() {
 
   return (
-      <div className={k.App}>
+      <div className={s.App}>
         <Display />
       </div>
   );

@@ -1,10 +1,13 @@
 
 .counter {
+
     text-align: center;
     vertical-align: center;
     padding: 1rem;
     border-radius: 5px;
     background-color: #8E91F5;
+    width: 22.3em;
+    height: 10em;
     min-width: 20.4em;
     min-height: 8em;
 
