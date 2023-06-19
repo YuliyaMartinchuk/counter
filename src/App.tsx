@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.module.css';
-import {Display} from "./component/Display/Display";
 import s from "./App.module.css"
+import {DisplayWithRedux} from "./component/WithRedux/Display/DisplayWithRedux";
 
 
 function App() {
 
   return (
       <div className={s.App}>
-        <Display />
+        <DisplayWithRedux />
       </div>
   );
 }

@@ -1,52 +1,42 @@
-import React, { ChangeEventHandler, useEffect, useState} from 'react';
-import k from "./Display.module.css"
-import s from "../Button/Button.module.css"
-import {Counter} from "../Counter/Counter";
-import {Button} from "../Button/Button";
-import {CounterSettings} from "../CounterSettings/CounterSettings";
-import {TEXT_ERROR, WITHOUT_ERROR} from "../../constants/constants";
+import React, { ChangeEventHandler} from 'react';
+import k from "../../Display/Display.module.css"
+import s from "../../Button/Button.module.css"
+import {Counter} from "../../Counter/Counter"
+import {Button} from "../../Button/Button";
+import {CounterSettings} from "../../CounterSettings/CounterSettings";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    counterErrorSelector,
+    counterMaxValueSelector,
+    counterStartValueSelector,
+    counterValueSelector
+} from "../../../redux/selectors/counterSelector";
+import {
+    IncreaseCounterValueAC, SetCounterErrorAC, SetCounterMaxValueAC,
+    SetCounterStartValueAC,
+    SetCounterValueAC
+} from "../../../redux/redusers/counterReducer";
 
-export const Display = () => {
 
-    const [counterValue, setCounterValue] = useState<number>(0)
-    const [maxValue, setMaxValue] = useState<number>(0)
-    const [startValue, setStartValue] = useState<number>(0)
-    const [error, setError] = useState<string>("enter values and press set")
+export const DisplayWithRedux = () => {
 
-    useEffect(() => {
-            let counterValueAsString = localStorage.getItem("counterValue")
-            let maxValueAsString = localStorage.getItem("maxValue")
-            let startValueAsString = localStorage.getItem("startValue")
+    const counterValue = useSelector(counterValueSelector)
+    const maxValue = useSelector(counterMaxValueSelector)
+    const startValue = useSelector(counterStartValueSelector)
+    const error = useSelector(counterErrorSelector)
 
-            if (counterValueAsString) {
-                setCounterValue(JSON.parse(counterValueAsString))
-            }
-            if (maxValueAsString) {
-                setMaxValue(JSON.parse(maxValueAsString))
-            }
-            if (startValueAsString) {
-                setStartValue(JSON.parse(startValueAsString))
-            }
-        }
-        , [])
-
-    useEffect(() => {
-        localStorage.setItem("counterValue", JSON.stringify(counterValue))
-    }, [counterValue])
-
+    const dispatch = useDispatch()
 
     const IncreaseHandler = () => {
-        setCounterValue(prevState => prevState + 1)
+       dispatch(IncreaseCounterValueAC(counterValue))
     }
 
     const ResetHandler = () => {
-        setCounterValue(0)
+        dispatch(SetCounterValueAC(startValue))
     }
 
     const setHandler = () => {
-        setCounterValue(startValue)
-        localStorage.setItem("maxValue", JSON.stringify(maxValue))
-        localStorage.setItem("startValue", JSON.stringify(startValue))
+        dispatch(SetCounterValueAC(startValue))
     }
 
 
@@ -54,12 +44,12 @@ export const Display = () => {
         const valueAsNumber = e.currentTarget.valueAsNumber
 
         if (valueAsNumber >= -1 && valueAsNumber <= maxValue) {
-            setStartValue(valueAsNumber)
+            dispatch(SetCounterStartValueAC(valueAsNumber))
         }
         if (valueAsNumber >= maxValue || valueAsNumber <= -1) {
-            setError(TEXT_ERROR)
+            dispatch(SetCounterErrorAC("incorrect value!"))
         } else {
-            setError(WITHOUT_ERROR)
+            dispatch(SetCounterErrorAC(""))
         }
 
     }
@@ -67,12 +57,12 @@ export const Display = () => {
     const maxValueChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
         const valueAsNumber = e.currentTarget.valueAsNumber
         if (valueAsNumber >= startValue) {
-            setMaxValue(valueAsNumber)
+            dispatch(SetCounterMaxValueAC(valueAsNumber))
         }
         if (valueAsNumber <= startValue || valueAsNumber <= -1) {
-            setError(TEXT_ERROR)
+            dispatch(SetCounterErrorAC("incorrect value!"))
         } else {
-            setError(WITHOUT_ERROR)
+            dispatch(SetCounterErrorAC(""))
         }
     }
 
@@ -85,7 +75,7 @@ export const Display = () => {
                     maxValueChangeHandler={maxValueChangeHandler}
                     startValueChangeHandler={startValueChangeHandler}
                     error={error}
-                    textError={TEXT_ERROR}
+                    textError={"incorrect value!"}
                 />
                 <div className={s.wrapperButton}>
                     <Button
@@ -93,13 +83,14 @@ export const Display = () => {
                         disabled={startValue >= maxValue || startValue < 0}
                     >set</Button>
                 </div>
+
             </div>
             <div className={k.wrapper}>
                 <Counter maxValue={maxValue}
                          startValue={startValue}
                          counterValue={counterValue}
                          error={error}
-                         textError={TEXT_ERROR}
+                         textError={"incorrect value!"}
                 />
                 <div className={s.wrapperButton}>
 

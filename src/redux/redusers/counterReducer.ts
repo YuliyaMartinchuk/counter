@@ -9,32 +9,42 @@ type initialStateType = {
 
 const initialState = {
     counterValue: 0,
-    maxValue: 0,
-    startValue: 5,
+    maxValue: 3,
+    startValue: 0,
     error: INITIAL_TEXT
 }
 
 export const counterReducer = (state = initialState, action: CounterActionsType): initialStateType => {
     switch (action.type) {
         case "INCREASE-VALUE": {
-            return {...state,
-            counterValue: action.payload.counterValue+1
+            return {
+                ...state,
+                counterValue: action.payload.counterValue + 1
             }
         }
 
         case "SET-VALUE": {
-            return {...state,
-            counterValue:action.payload.startValue
+            return {
+                ...state,
+                counterValue: action.payload.startValue
             }
         }
         case "SET-START-VALUE": {
-            return {...state,
-            startValue:action.payload.startValue
+            return {
+                ...state,
+                startValue: action.payload.startValue
             }
         }
         case "SET-MAX-VALUE": {
-            return {...state,
-            maxValue: action.payload.maxValue
+            return {
+                ...state,
+                maxValue: action.payload.maxValue
+            }
+        }
+        case "SET-ERROR":{
+            return {
+                ...state,
+                error: action.payload.error
             }
         }
         default:
@@ -46,10 +56,10 @@ export const counterReducer = (state = initialState, action: CounterActionsType)
 
 type CounterActionsType =
     IncreaseCounterValuerACType
-    // | ResetCounterValueACType
     | SetCounterValueACType
     | SetCounterStartValueACType
     | SetCounterMaxValueACType
+    | SetCounterErrorACType
 
 type IncreaseCounterValuerACType = ReturnType<typeof IncreaseCounterValueAC>
 
@@ -61,17 +71,6 @@ export const IncreaseCounterValueAC = (counterValue: number) => {
         }
     } as const
 }
-
-// type ResetCounterValueACType = ReturnType<typeof ResetCounterValueAC>
-//
-// export const ResetCounterValueAC = (startValue: number) => {
-//     return {
-//         type: "RESET-VALUE",
-//         payload: {
-//             startValue
-//         }
-//     } as const
-// }
 
 type SetCounterValueACType = ReturnType<typeof SetCounterValueAC>
 
@@ -105,3 +104,16 @@ export const SetCounterMaxValueAC = (maxValue: number) => {
         }
     } as const
 }
+
+type SetCounterErrorACType = ReturnType<typeof SetCounterErrorAC>
+type errorType = "incorrect value!" | "enter values and press set" | ""
+
+export const SetCounterErrorAC = (error: errorType) => {
+    return {
+        type: "SET-ERROR",
+        payload: {
+            error
+        }
+    } as const
+}
+
